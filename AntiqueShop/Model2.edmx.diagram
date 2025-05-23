@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="AntiqueShopModel.Sales" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="AntiqueShopModel.Statuses" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AntiqueShopModel.Suppliers" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntiqueShopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AntiqueShopModel.Users" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
         <AssociationConnector Association="AntiqueShopModel.FK__Cart__id_item__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="AntiqueShopModel.FK__Cart__id_user__3B75D760" ManuallyRouted="false" />

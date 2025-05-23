@@ -8,7 +8,98 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage">
 
-    <Grid>
-        
+    <Grid Background="#FFEEE0CB">
+        <Border Background="White" CornerRadius="20" Padding="30"
+                Width="450" VerticalAlignment="Center" HorizontalAlignment="Center"
+                BorderBrush="#FF8B5E3C" BorderThickness="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Регистрация" FontSize="24" FontWeight="Bold"
+                               Foreground="#8B5E3C" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                    <!-- Пример для логина -->
+                    <Grid Margin="0,0,0,10">
+                        <TextBox x:Name="LoginBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <TextBlock x:Name="LoginPlaceholder" Text="Логин" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Пароль -->
+                    <Grid Margin="0,0,0,10">
+                        <PasswordBox x:Name="PasswordBox" Height="35" FontSize="14"
+                                     Padding="10,0" VerticalContentAlignment="Center" PasswordChanged="PasswordBox_PasswordChanged"/>
+                        <TextBlock x:Name="PasswordPlaceholder" Text="Пароль" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Подтверждение пароля -->
+                    <Grid Margin="0,0,0,10">
+                        <PasswordBox x:Name="ConfirmPasswordBox" Height="35" FontSize="14"
+                                     Padding="10,0" VerticalContentAlignment="Center" PasswordChanged="PasswordBox_PasswordChanged"/>
+                        <TextBlock x:Name="ConfirmPasswordPlaceholder" Text="Подтверждение пароля"
+                                   FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Имя -->
+                    <Grid Margin="0,0,0,10">
+                        <TextBox x:Name="FirstNameBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <TextBlock x:Name="FirstNamePlaceholder" Text="Имя" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Фамилия -->
+                    <Grid Margin="0,0,0,10">
+                        <TextBox x:Name="LastNameBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <TextBlock x:Name="LastNamePlaceholder" Text="Фамилия" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Отчество -->
+                    <Grid Margin="0,0,0,10">
+                        <TextBox x:Name="MiddleNameBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <TextBlock x:Name="MiddleNamePlaceholder" Text="Отчество" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Email -->
+                    <Grid Margin="0,0,0,10">
+                        <TextBox x:Name="EmailBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <TextBlock x:Name="EmailPlaceholder" Text="Email" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Предпочтения -->
+                    <Grid Margin="0,0,0,20">
+                        <TextBox x:Name="PreferencesBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <TextBlock x:Name="PreferencesPlaceholder" Text="Предпочтения" FontSize="14" Foreground="Gray"
+                                   Margin="10,0,0,0" VerticalAlignment="Center"
+                                   IsHitTestVisible="False" Visibility="Visible"/>
+                    </Grid>
+
+                    <!-- Кнопка регистрации -->
+                    <Button Content="Зарегистрироваться" Height="35" Background="#8B5E3C"
+                            Foreground="White" FontWeight="SemiBold"
+                            Click="RegisterButton_Click"/>
+                    
+                    <Button Content="Назад" Height="35" Background="#8B5E3C"
+                            Foreground="White" FontWeight="SemiBold"
+                            Click="BackButton_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

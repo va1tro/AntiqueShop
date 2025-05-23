@@ -41,13 +41,13 @@ namespace AntiqueShop.Pages
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var role = db.Role.FirstOrDefault();
             var user = db.Users.FirstOrDefault(u =>
                 u.login == LoginBox.Text && u.password == PasswordBox.Password);
 
             if (user != null)
             {
-                MessageBox.Show($"Добро пожаловать, {user.first_name}, {role.name_role}!");
+                MessageBox.Show($"Добро пожаловать, {user.first_name}!");
+                NavigationService.Navigate(new ItemsPage());
 
                 // Пример навигации на главную страницу после входа
                 //NavigationService.Navigate(new MainMenuPage(user)); // передаём пользователя

@@ -36,7 +36,6 @@ namespace AntiqueShop
         public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<Statuses> Statuses { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }
