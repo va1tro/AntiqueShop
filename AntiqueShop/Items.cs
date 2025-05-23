@@ -51,5 +51,22 @@ namespace AntiqueShop
         public virtual Suppliers Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sales> Sales { get; set; }
+
+        public string CurrentPhoto
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(image) || String.IsNullOrWhiteSpace(image))
+                {
+                    return "/Images/picture.jpg";
+                }
+                else
+                {
+                    return "/Images/" + image;
+                }
+            }
+        }
+
+
     }
 }

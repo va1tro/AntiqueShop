@@ -47,10 +47,8 @@ namespace AntiqueShop.Pages
             if (user != null)
             {
                 MessageBox.Show($"Добро пожаловать, {user.first_name}!");
-                NavigationService.Navigate(new ItemsPage());
-
-                // Пример навигации на главную страницу после входа
-                //NavigationService.Navigate(new MainMenuPage(user)); // передаём пользователя
+                NavigationService.Navigate(new ProductsPage());
+                //NavigationService.Navigate(new AddEditItemPage());
             }
             else
             {
