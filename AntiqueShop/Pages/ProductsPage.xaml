@@ -92,15 +92,15 @@
                                 </TextBlock>
                                 <TextBlock>
                                     <Run Text="Категория: "/>
-                                    <Run Text="{Binding Category.name_category}"/>
+                                    <Run Text="{Binding Categories.name_category}"/>
                                 </TextBlock>
                                 <TextBlock>
                                     <Run Text="Материал: "/>
-                                    <Run Text="{Binding Material.name_material}"/>
+                                    <Run Text="{Binding Materials.name_material}"/>
                                 </TextBlock>
                                 <TextBlock>
                                     <Run Text="Страна: "/>
-                                    <Run Text="{Binding OriginCountry.name_country}"/>
+                                    <Run Text="{Binding Origin_countries.name_country}"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
