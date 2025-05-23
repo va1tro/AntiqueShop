@@ -21,11 +21,9 @@ namespace AntiqueShop.Pages
     /// </summary>
     public partial class AddEditItemPage : Page
     {
-        private AntiqueShopEntities3 db = new AntiqueShopEntities3();
         public AddEditItemPage()
         {
             InitializeComponent();
-            fff.ItemsSource = db.Role.ToList();
         }
     }
 }

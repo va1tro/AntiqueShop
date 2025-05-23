@@ -9,7 +9,6 @@
       Title="AddEditItemPage">
 
     <Grid>
-        <DataGrid x:Name="fff"/>
-
+        
     </Grid>
 </Page>
