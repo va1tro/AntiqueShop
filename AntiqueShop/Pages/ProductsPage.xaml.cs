@@ -168,7 +168,5 @@ namespace AntiqueShop.Pages
         {
             listItems.ItemsSource = FindItems();
         }
-
-
     }
 }

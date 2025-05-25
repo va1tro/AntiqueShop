@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntiqueShop.AppData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,20 +42,27 @@ namespace AntiqueShop.Pages
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var user = db.Users.FirstOrDefault(u =>
-                u.login == LoginBox.Text && u.password == PasswordBox.Password);
+            var login = LoginBox.Text.Trim();
+            var password = PasswordBox.Password.Trim();
+
+            var user = AppConnect.model0db.Users
+                .FirstOrDefault(u => u.login == login && u.password == password);
 
             if (user != null)
             {
-                MessageBox.Show($"Добро пожаловать, {user.first_name}!");
-                NavigationService.Navigate(new ProductsPage());
-                //NavigationService.Navigate(new AddEditItemPage());
+                AppConnect.CurrentUser = user; // Сохраняем пользователя
+
+                if (user.id_role == 1) // админ
+                    NavigationService.Navigate(new AdminPage());
+                else // обычный пользователь
+                    NavigationService.Navigate(new UserPage());
             }
             else
             {
-                MessageBox.Show("Неверный логин или пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Неверный логин или пароль");
             }
         }
+
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage()); // Убедись, что эта страница существует

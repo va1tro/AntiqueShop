@@ -90,13 +90,13 @@
                                    IsHitTestVisible="False" Visibility="Visible"/>
                     </Grid>
 
-                    <!-- Кнопка регистрации -->
-                    <Button Content="Зарегистрироваться" Height="35" Background="#8B5E3C"
+                    <Button Content="Регистрация" Height="35" Background="#8B5E3C"
                             Foreground="White" FontWeight="SemiBold"
-                            Click="RegisterButton_Click"/>
+                            Click="RegisterButton_Click" Margin="0,0,0,10" />
                     
-                    <Button Content="Назад" Height="35" Background="#8B5E3C"
-                            Foreground="White" FontWeight="SemiBold"
+                    <Button Content="Назад" Height="30" Background="Transparent"
+                            BorderBrush="#8B5E3C" BorderThickness="1"
+                            Foreground="#8B5E3C" FontWeight="Normal"
                             Click="BackButton_Click"/>
                 </StackPanel>
             </ScrollViewer>
