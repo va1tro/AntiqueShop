@@ -109,7 +109,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Кнопки управления
+        <!-- Кнопки управления-->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
             <Button x:Name="btnAdd" Content="Добавить" Width="100" Margin="5" Click="BtnAdd_Click"
                     Background="#FFA58B5F" Foreground="White"/>
@@ -117,7 +117,7 @@
                     Background="#FFA58B5F" Foreground="White"/>
             <Button x:Name="btnDelete" Content="Удалить" Width="100" Margin="5" Click="BtnDelete_Click"
                     Background="#FFA58B5F" Foreground="White"/>
-        </StackPanel>-->
+        </StackPanel>
 
         <TextBlock x:Name="tbCounter" Text="Товаров не найдено" Grid.Row="2" 
                    HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>

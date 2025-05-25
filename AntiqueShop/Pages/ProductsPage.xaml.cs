@@ -99,25 +99,25 @@ namespace AntiqueShop.Pages
             return items;
         }
 
-        //private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        //{
-        //    NavigationService.Navigate(new AddEditItemPage(new Items()));
-        //}
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditPage(new Items()));
+        }
 
-        //private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (listItems.SelectedItem is Items selectedItem)
-        //    {
-        //        NavigationService.Navigate(new AddEditItemPage(selectedItem));
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Пожалуйста, выберите товар для редактирования",
-        //                      "Внимание",
-        //                      MessageBoxButton.OK,
-        //                      MessageBoxImage.Warning);
-        //    }
-        //}
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (listItems.SelectedItem is Items selectedItem)
+            {
+                NavigationService.Navigate(new AddEditPage(selectedItem));
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите товар для редактирования",
+                              "Внимание",
+                              MessageBoxButton.OK,
+                              MessageBoxImage.Warning);
+            }
+        }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {

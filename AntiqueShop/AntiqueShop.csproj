@@ -90,8 +90,8 @@
     <Compile Include="Origin_countries.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddEditItemPage.xaml.cs">
-      <DependentUpon>AddEditItemPage.xaml</DependentUpon>
+    <Compile Include="Pages\AddEditPage.xaml.cs">
+      <DependentUpon>AddEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProductsPage.xaml.cs">
       <DependentUpon>ProductsPage.xaml</DependentUpon>
@@ -128,7 +128,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AddEditItemPage.xaml">
+    <Page Include="Pages\AddEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
