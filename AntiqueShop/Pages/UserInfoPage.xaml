@@ -9,29 +9,100 @@
       Title="UserInfoPage">
 
     <Grid Background="#FFEEE0CB">
-        <Border Background="White" CornerRadius="20" Padding="30" Margin="20"
-                BorderBrush="#8B5E3C" BorderThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Width="400" >
-                <TextBlock Text="Информация о пользователе" FontSize="22" FontWeight="Bold"
+        <Border Background="White" CornerRadius="20" Padding="30"
+                Width="450" VerticalAlignment="Center" HorizontalAlignment="Center"
+                BorderBrush="#FF8B5E3C" BorderThickness="2">
+            <StackPanel>
+
+                <TextBlock Text="Информация о пользователе" FontSize="24" FontWeight="Bold"
                            Foreground="#8B5E3C" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                <TextBlock Text="ФИО:" FontWeight="SemiBold" Foreground="#8B5E3C"/>
-                <TextBlock x:Name="tbFullName" Margin="0,0,0,10"/>
+                <!-- Фамилия -->
+                <Grid Margin="0,0,0,10">
+                    <TextBox x:Name="LastNameBox" Height="35" FontSize="14" Padding="10,0"
+                             VerticalContentAlignment="Center" TextChanged="LastNameBox_TextChanged"/>
+                    <TextBlock x:Name="LastNamePlaceholder" Text="Фамилия"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
 
-                <TextBlock Text="Логин:" FontWeight="SemiBold" Foreground="#8B5E3C"/>
-                <TextBlock x:Name="tbLogin" Margin="0,0,0,10"/>
+                <!-- Имя -->
+                <Grid Margin="0,0,0,10">
+                    <TextBox x:Name="FirstNameBox" Height="35" FontSize="14" Padding="10,0"
+                             VerticalContentAlignment="Center" TextChanged="FirstNameBox_TextChanged"/>
+                    <TextBlock x:Name="FirstNamePlaceholder" Text="Имя"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
 
-                <TextBlock Text="Email:" FontWeight="SemiBold" Foreground="#8B5E3C"/>
-                <TextBlock x:Name="tbEmail" Margin="0,0,0,10"/>
+                <!-- Отчество -->
+                <Grid Margin="0,0,0,10">
+                    <TextBox x:Name="MiddleNameBox" Height="35" FontSize="14" Padding="10,0"
+                             VerticalContentAlignment="Center" TextChanged="MiddleNameBox_TextChanged"/>
+                    <TextBlock x:Name="MiddleNamePlaceholder" Text="Отчество"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
 
-                <TextBlock Text="Роль:" FontWeight="SemiBold" Foreground="#8B5E3C"/>
-                <TextBlock x:Name="tbRole" Margin="0,0,0,10"/>
+                <!-- Email -->
+                <Grid Margin="0,0,0,10">
+                    <TextBox x:Name="EmailBox" Height="35" FontSize="14" Padding="10,0"
+                             VerticalContentAlignment="Center" TextChanged="EmailBox_TextChanged"/>
+                    <TextBlock x:Name="EmailPlaceholder" Text="Email"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
 
-                <TextBlock Text="Предпочтения:" FontWeight="SemiBold" Foreground="#8B5E3C"/>
-                <TextBlock x:Name="tbPreferences" Margin="0,0,0,20" TextWrapping="Wrap"/>
+                <!-- Предпочтения -->
+                <Grid Margin="0,0,0,10">
+                    <TextBox x:Name="PreferencesBox" Height="35" FontSize="14" Padding="10,0"
+                             VerticalContentAlignment="Center" TextChanged="PreferencesBox_TextChanged"/>
+                    <TextBlock x:Name="PreferencesPlaceholder" Text="Предпочтения"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
+                <Grid Margin="0,0,0,10">
+                    <PasswordBox x:Name="OldPasswordBox" Height="35" FontSize="14" Padding="10,0"
+                                VerticalContentAlignment="Center" PasswordChanged="OldPasswordBox_PasswordChanged"/>
+                    <TextBlock x:Name="OldPasswordPlaceholder" Text="Старый пароль"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>  
+                </Grid>
 
-                <Button Content="Назад" Height="35" Width="100" Background="#8B5E3C" 
-                        Foreground="White" Click="BtnBack_Click"/>
+                <!-- Новый пароль -->
+                <Grid Margin="0,0,0,10">
+                    <PasswordBox x:Name="NewPasswordBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" PasswordChanged="NewPasswordBox_PasswordChanged"/>
+                    <TextBlock x:Name="NewPasswordPlaceholder" Text="Новый пароль"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
+
+                <!-- Подтверждение пароля -->
+                <Grid Margin="0,0,0,20">
+                    <PasswordBox x:Name="ConfirmPasswordBox" Height="35" FontSize="14" Padding="10,0"
+                                 VerticalContentAlignment="Center" PasswordChanged="ConfirmPasswordBox_PasswordChanged"/>
+                    <TextBlock x:Name="ConfirmPasswordPlaceholder" Text="Подтвердите пароль"
+                               FontSize="14" Foreground="Gray"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False" Visibility="Visible"/>
+                </Grid>
+
+                <Button Content="Сохранить" Height="35" Background="#8B5E3C"
+                        Foreground="White" FontWeight="SemiBold" Click="ButtonSave_Click" />
+
+                <Button Content="Назад" Height="30" Background="Transparent"
+                        BorderBrush="#8B5E3C" BorderThickness="1"
+                        Foreground="#8B5E3C" FontWeight="Normal"
+                        Margin="0,10,0,0" Click="BackButton_Click"/>
+
             </StackPanel>
         </Border>
     </Grid>

@@ -46,7 +46,7 @@
         </StackPanel>
 
         <!-- Список товаров -->
-        <ListView x:Name="listItems" Grid.Row="2" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="listItems" MouseDoubleClick="listItems_MouseDoubleClick" Grid.Row="2" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>

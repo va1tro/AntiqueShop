@@ -29,7 +29,7 @@
                                            DockPanel.Dock="Left"/>
                                     <TextBlock Text="{Binding Items.name_item}" FontSize="16" FontWeight="Bold"/>
                                     <TextBlock Text="{Binding sale_date, StringFormat='Дата: {0:dd.MM.yyyy}'}"/>
-                                    <TextBlock Text="{Binding final_price, StringFormat='Цена: {0:C}'}"/>
+                                    <TextBlock Text="{Binding Items.selling_price, StringFormat='Цена: {0:N2} ₽'}" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

@@ -28,7 +28,7 @@
                                            Stretch="UniformToFill"
                                            DockPanel.Dock="Left"/>  
                                     <TextBlock Text="{Binding Items.name_item}" FontSize="16" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Items.selling_price, StringFormat='Цена: {0:C}'}"/>
+                                    <TextBlock Text="{Binding Items.selling_price, StringFormat='Цена: {0:N2} ₽'}" />
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
                                         <TextBlock Text="Количество: " VerticalAlignment="Center"/>
                                         <TextBox Width="40" Margin="5,0,0,0" Text="{Binding quantity}" TextChanged="QuantityChanged"/>

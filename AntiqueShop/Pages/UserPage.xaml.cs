@@ -202,5 +202,12 @@ namespace AntiqueShop.Pages
         {
             NavigationService.Navigate(new LoginPage());
         }
+        private void listItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listItems.SelectedItem is Items selectedItem)
+            {
+                NavigationService.Navigate(new ItemDetailsPage(selectedItem));
+            }
+        }
     }
 }
