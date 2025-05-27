@@ -1,0 +1,31 @@
+﻿<Page x:Class="AntiqueShop.Pages.ItemLogsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AntiqueShop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Журнал изменений">
+
+    <Grid Background="#FFE8DCCA" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Журнал изменений товара" FontSize="24" FontWeight="Bold" Foreground="#8B5E3C" Margin="0,0,0,20"/>
+        <Button Content="← Назад" Width="80" Height="30" Background="Transparent"
+                BorderBrush="Transparent" BorderThickness="1" Foreground="#8B5E3C"
+                FontWeight="Normal" Margin="0,0,0,10" Click="BtnBack_Click"/>
+        <DataGrid x:Name="LogsDataGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False"
+                  HeadersVisibility="Column" Background="White" BorderBrush="#FFA58B5F" BorderThickness="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Поле" Binding="{Binding changed_field}" Width="*" />
+                <DataGridTextColumn Header="Старое значение" Binding="{Binding old_value}" Width="*" />
+                <DataGridTextColumn Header="Новое значение" Binding="{Binding new_value}" Width="*" />
+                <DataGridTextColumn Header="Дата изменения" Binding="{Binding change_date, StringFormat=dd.MM.yyyy HH:mm}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

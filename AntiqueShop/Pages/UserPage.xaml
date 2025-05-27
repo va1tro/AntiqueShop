@@ -17,13 +17,44 @@
         </Grid.RowDefinitions>
 
         <!-- Меню -->
-        <Menu Background="#FFD9C7A7" Grid.Row="0">
-            <MenuItem Header="Корзина" Click="Cart_Click"/>
-            <MenuItem Header="Избранное" Click="Favorites_Click"/>
-            <MenuItem Header="Мои заказы" Click="MyOrders_Click"/>
-            <MenuItem Header="Личная информация" Click="UserInfo_Click"/>
-            <MenuItem Header="Выход" FontWeight="Bold" Click="Logout_Click"/>
-        </Menu>
+        <Border Background="#FFD9C7A7" CornerRadius="0,0,10,10" BorderBrush="#8B5E3C" BorderThickness="0,0,0,1" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="🛒 Корзина" Click="Cart_Click"
+                FontSize="16" FontWeight="SemiBold"
+                Margin="10,0" Padding="15,5"
+                Background="White" Foreground="#8B5E3C" 
+                BorderBrush="#8B5E3C" BorderThickness="1" 
+                Cursor="Hand"/>
+
+                <Button Content="⭐ Избранное" Click="Favorites_Click"
+                FontSize="16" FontWeight="SemiBold"
+                Margin="10,0" Padding="15,5"
+                Background="White" Foreground="#8B5E3C" 
+                BorderBrush="#8B5E3C" BorderThickness="1"
+                Cursor="Hand"/>
+
+                <Button Content="📦 Мои заказы" Click="MyOrders_Click"
+                FontSize="16" FontWeight="SemiBold"
+                Margin="10,0" Padding="15,5"
+                Background="White" Foreground="#8B5E3C"
+                BorderBrush="#8B5E3C" BorderThickness="1"
+                Cursor="Hand"/>
+
+                <Button Content="👤 Личная информация" Click="UserInfo_Click"
+                FontSize="16" FontWeight="SemiBold"
+                Margin="10,0" Padding="15,5"
+                Background="White" Foreground="#8B5E3C"
+                BorderBrush="#8B5E3C" BorderThickness="1"
+                Cursor="Hand"/>
+
+                <Button Content="⛔ Выход" Click="Logout_Click"
+                FontSize="16" FontWeight="Bold"
+                Margin="10,0" Padding="15,5"
+                Background="#D98C7C" Foreground="White"
+                BorderBrush="#8B5E3C" BorderThickness="1"
+                Cursor="Hand"/>
+            </StackPanel>
+        </Border>
 
         <!-- Панель фильтров и поиска -->
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1" Background="#FFD9C7A7">
@@ -68,7 +99,7 @@
                             <TextBlock Text="Цена: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding selling_price, StringFormat='{}{0} руб.'}" Margin="0,0,0,10"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="В корзину" Margin="5" Click="AddToCart_Click"/>
+                                <Button Content="🛒 В корзину" Margin="5" Click="AddToCart_Click"/>
                                 <Button Content="★" Margin="5" Click="AddToFavorites_Click"/>
                             </StackPanel>
                         </StackPanel>
