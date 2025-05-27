@@ -6,112 +6,58 @@
       xmlns:local="clr-namespace:AntiqueShop.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Добавление/Редактирование товара"
-      Background="#FFE8DCCA">
+      Title="Добавление/Редактирование товара">
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Background="#FFE8DCCA" Margin="20">
+        <Border Background="White" CornerRadius="10" Padding="20" BorderBrush="#8B5E3C" BorderThickness="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Название товара:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbName" Margin="0,5,0,10"/>
 
-        <!-- Заголовок -->
-        <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="20" FontWeight="Bold" 
-                   HorizontalAlignment="Center" Margin="0,10,0,20"/>
+                    <TextBlock Text="Год выпуска:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbYear" Margin="0,5,0,10"/>
 
-        <!-- Основная форма -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                    <TextBlock Text="Состояние:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbCondition" Margin="0,5,0,10"/>
 
-                <!-- Изображение товара -->
-                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" 
-                        BorderBrush="#FFA58B5F" BorderThickness="1" CornerRadius="5" 
-                        Margin="5" Padding="5" Background="White">
-                    <Image x:Name="imgItem" Source="/Images/picture.jpg" 
-                           Stretch="Uniform" MaxHeight="200" MinHeight="150"/>
-                </Border>
-                <Button Grid.Row="5" Grid.Column="0" Content="Выбрать изображение" 
-                        Width="150" Margin="5" HorizontalAlignment="Center" 
-                        Click="BtnSelectImage_Click"/>
+                    <TextBlock Text="Подлинность:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbAuthenticity" Margin="0,5,0,10"/>
 
-                <!-- Основные поля -->
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Наименование товара:" Margin="5"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbName" Margin="5"/>
+                    <TextBlock Text="Цена покупки:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbPurchasePrice" Margin="0,5,0,10"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Год изготовления:" Margin="5"/>
-                <TextBox Grid.Row="3" Grid.Column="1" x:Name="tbYear" Margin="5"/>
+                    <TextBlock Text="Цена продажи:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbSellingPrice" Margin="0,5,0,10"/>
 
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="Поставщик:" Margin="5"/>
-                <ComboBox Grid.Row="5" Grid.Column="1" x:Name="cbSupplier" Margin="5" DisplayMemberPath="name_supplier"/>
+                    <TextBlock Text="Дата поступления:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <DatePicker x:Name="dpArrivalDate" Margin="0,5,0,10"/>
 
-                <!-- Финансовые поля -->
-                <TextBlock Grid.Row="8" Grid.Column="0" Text="Цена покупки:" Margin="5"/>
-                <TextBox Grid.Row="8" Grid.Column="1" x:Name="tbPurchasePrice" Margin="5"/>
+                    <TextBlock Text="Изображение (имя файла):" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <TextBox x:Name="tbImage" Margin="0,5,0,10"/>
 
-                <TextBlock Grid.Row="9" Grid.Column="0" Text="Цена продажи:" Margin="5"/>
-                <TextBox Grid.Row="9" Grid.Column="1" x:Name="tbSellingPrice" Margin="5"/>
+                    <!-- Выпадающие списки -->
+                    <TextBlock Text="Категория:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <ComboBox x:Name="cbCategory" Margin="0,5,0,10"/>
 
-                <TextBlock Grid.Row="10" Grid.Column="0" Text="Дата поступления:" Margin="5"/>
-                <DatePicker Grid.Row="10" Grid.Column="1" x:Name="dpArrivalDate" Margin="5"/>
+                    <TextBlock Text="Материал:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <ComboBox x:Name="cbMaterial" Margin="0,5,0,10"/>
 
-                <!-- Выпадающие списки -->
-                <TextBlock Grid.Row="11" Grid.Column="0" Text="Категория:" Margin="5"/>
-                <ComboBox Grid.Row="11" Grid.Column="1" x:Name="cbCategory" Margin="5" DisplayMemberPath="name_category"/>
+                    <TextBlock Text="Поставщик:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <ComboBox x:Name="cbSupplier" Margin="0,5,0,10"/>
 
-                <TextBlock Grid.Row="12" Grid.Column="0" Text="Материал:" Margin="5"/>
-                <ComboBox Grid.Row="12" Grid.Column="1" x:Name="cbMaterial" Margin="5" DisplayMemberPath="name_material"/>
+                    <TextBlock Text="Статус:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <ComboBox x:Name="cbStatus" Margin="0,5,0,10"/>
 
-                <TextBlock Grid.Row="13" Grid.Column="0" Text="Страна происхождения:" Margin="5"/>
-                <ComboBox Grid.Row="13" Grid.Column="1" x:Name="cbCountry" Margin="5" DisplayMemberPath="name_country"/>
-                
-                <TextBlock Grid.Row="14" Grid.Column="0" Text="Статус:" Margin="5"/>
-                <ComboBox Grid.Row="14" Grid.Column="1" x:Name="cbStatus" Margin="5" DisplayMemberPath="name_status"/>
-                <!-- Дополнительные характеристики -->
-                <TextBlock Grid.Row="6" Grid.Column="0" Text="Состояние:" Margin="5,16,5,26" Grid.RowSpan="2"/>
-                <ComboBox Grid.Row="6" Grid.Column="1" x:Name="cbCondition" Margin="5">
-                    <ComboBoxItem Content="Отличное"/>
-                    <ComboBoxItem Content="Хорошее"/>
-                    <ComboBoxItem Content="Удовлетворительное"/>
-                    <ComboBoxItem Content="Плохое"/>
-                </ComboBox>
+                    <TextBlock Text="Страна происхождения:" FontWeight="Bold" Foreground="#8B5E3C"/>
+                    <ComboBox x:Name="cbOriginCountry" Margin="0,5,0,20"/>
 
-                <TextBlock Grid.Row="7" Grid.Column="0" Text="Подлинность:" Margin="5,15,5,29" Grid.RowSpan="2"/>
-                <ComboBox Grid.Row="7" Grid.Column="1" x:Name="cbAuthenticity" Margin="5">
-                    <ComboBoxItem Content="Подлинный"/>
-                    <ComboBoxItem Content="Реставрированный"/>
-                    <ComboBoxItem Content="Копия"/>
-                </ComboBox>
-            </Grid>
-        </ScrollViewer>
-
-        <!-- Кнопки -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button x:Name="btnSave" Content="Сохранить" Width="100" Margin="5" 
-                    Background="#FFA58B5F" Foreground="White" Click="BtnSave_Click"/>
-            <Button x:Name="btnCancel" Content="Отмена" Width="100" Margin="5" 
-                    Background="#FFA58B5F" Foreground="White" Click="BtnCancel_Click"/>
-        </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Сохранить" Width="100" Margin="5" Background="#8B5E3C" Foreground="White" Click="Save_Click"/>
+                        <Button Content="Отмена" Width="100" Margin="5" Click="Cancel_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>
