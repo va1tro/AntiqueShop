@@ -31,24 +31,38 @@ namespace AntiqueShop.Pages
         {
             InitializeComponent();
             LoadData();
+            this.Loaded += AdminPage_Loaded;
         }
 
         private void LoadData()
         {
             items = db.Items.ToList();
-            ComboFilter.ItemsSource = db.Categories.ToList();
+
+            var categories = db.Categories.ToList();
+            categories.Insert(0, new Categories { id_category = 0, name_category = "Все" });
+
+            ComboFilter.ItemsSource = categories;
             ComboFilter.DisplayMemberPath = "name_category";
-            ComboFilter.SelectedIndex = -1;
+            ComboFilter.SelectedIndex = 0; // "Все" будет выбран по умолчанию
+
             ApplyFilters();
         }
+        private void AdminPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            db = new AntiqueShopEntities3(); // Пересоздаём контекст
+            LoadData(); // Загружаем данные и обновляем список
+        }
+
 
         private void ApplyFilters()
         {
             var filtered = items.AsEnumerable();
 
             // Фильтр по категории
-            if (ComboFilter.SelectedItem is Categories category)
+            if (ComboFilter.SelectedItem is Categories category && category.id_category != 0)
+            {
                 filtered = filtered.Where(i => i.id_category == category.id_category);
+            }
 
             // Поиск по названию
             if (!string.IsNullOrWhiteSpace(TextSearch.Text))
@@ -103,9 +117,9 @@ namespace AntiqueShop.Pages
 
         private void EditItem_Click(object sender, RoutedEventArgs e)
         {
-            if (listItems.SelectedItem is Items selected)
+            if (listItems.SelectedItem is Items selectedItem)
             {
-                NavigationService.Navigate(new AddEditPage(selected));
+                NavigationService.Navigate(new AddEditPage(selectedItem));
             }
             else
             {
@@ -226,6 +240,11 @@ namespace AntiqueShop.Pages
             {
                 NavigationService.Navigate(new ItemDetailsPage(selected));
             }
+        }
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            db = new AntiqueShopEntities3(); // Обновим контекст, если были изменения
+            LoadData();
         }
     }
 }

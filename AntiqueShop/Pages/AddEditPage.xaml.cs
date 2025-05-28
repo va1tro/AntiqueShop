@@ -26,120 +26,98 @@ namespace AntiqueShop.Pages
     /// </summary>
     public partial class AddEditPage : Page
     {
-        private Items _currentItem = new Items();
-        private string _selectedImagePath = null;
-        private bool _isEditMode = false;
+        private Items _currentItem;
+        private AntiqueShopEntities3 _context = new AntiqueShopEntities3();
 
         public AddEditPage(Items selectedItem = null)
         {
             InitializeComponent();
 
+            // Если редактирование, то запоминаем выбранный товар
+            _currentItem = selectedItem ?? new Items();
+
+            // Привязка данных к ComboBox'ам
+            cbCategory.ItemsSource = _context.Categories.ToList();
+            cbCategory.DisplayMemberPath = "name_category";
+            cbCategory.SelectedValuePath = "id_category";
+
+            cbMaterial.ItemsSource = _context.Materials.ToList();
+            cbMaterial.DisplayMemberPath = "name_material";
+            cbMaterial.SelectedValuePath = "id_material";
+
+            cbSupplier.ItemsSource = _context.Suppliers.ToList();
+            cbSupplier.DisplayMemberPath = "name_supplier";
+            cbSupplier.SelectedValuePath = "id_supplier";
+
+            cbStatus.ItemsSource = _context.Statuses.ToList();
+            cbStatus.DisplayMemberPath = "name_status";
+            cbStatus.SelectedValuePath = "id_status";
+
+            cbOriginCountry.ItemsSource = _context.Origin_countries.ToList();
+            cbOriginCountry.DisplayMemberPath = "name_country";
+            cbOriginCountry.SelectedValuePath = "id_country";
+
+            // Если редактируем — заполним поля
             if (selectedItem != null)
-            {
-                _currentItem = selectedItem;
-                _isEditMode = true;
-            }
-
-            DataContext = _currentItem;
-
-            cbSupplier.ItemsSource = AppConnect.model0db.Suppliers.ToList();
-            cbCategory.ItemsSource = AppConnect.model0db.Categories.ToList();
-            cbMaterial.ItemsSource = AppConnect.model0db.Materials.ToList();
-            cbCountry.ItemsSource = AppConnect.model0db.Origin_countries.ToList();
-            cbStatus.ItemsSource = AppConnect.model0db.Statuses.ToList();
-
-            if (_isEditMode)
             {
                 tbName.Text = _currentItem.name_item;
                 tbYear.Text = _currentItem.year?.ToString();
+                tbCondition.Text = _currentItem.condition;
+                tbAuthenticity.Text = _currentItem.authenticity;
                 tbPurchasePrice.Text = _currentItem.purchase_price?.ToString();
                 tbSellingPrice.Text = _currentItem.selling_price?.ToString();
                 dpArrivalDate.SelectedDate = _currentItem.arrival_date;
+                tbImage.Text = _currentItem.image;
 
-                cbSupplier.SelectedItem = _currentItem.Suppliers;
-                cbCategory.SelectedItem = _currentItem.Categories;
-                cbMaterial.SelectedItem = _currentItem.Materials;
-                cbCountry.SelectedItem = _currentItem.Origin_countries;
-                cbStatus.SelectedItem = _currentItem.Statuses;
-
-                cbCondition.Text = _currentItem.condition;
-                cbAuthenticity.Text = _currentItem.authenticity;
-
-                imgItem.Source = new BitmapImage(new Uri(_currentItem.CurrentPhoto, UriKind.RelativeOrAbsolute));
+                cbCategory.SelectedValue = _currentItem.id_category;
+                cbMaterial.SelectedValue = _currentItem.id_material;
+                cbSupplier.SelectedValue = _currentItem.id_supplier;
+                cbStatus.SelectedValue = _currentItem.id_status;
+                cbOriginCountry.SelectedValue = _currentItem.id_origin_country;
             }
         }
-
-        private void BtnSelectImage_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Изображения (*.jpg;*.png)|*.jpg;*.png";
-
-            if (ofd.ShowDialog() == true)
-            {
-                _selectedImagePath = ofd.FileName;
-                imgItem.Source = new BitmapImage(new Uri(_selectedImagePath));
-
-                _currentItem.image = System.IO.Path.GetFileName(_selectedImagePath);
-            }
-        }
-
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            // Валидация
-            if (string.IsNullOrWhiteSpace(tbName.Text) || cbSupplier.SelectedItem == null)
-            {
-                MessageBox.Show("Пожалуйста, заполните обязательные поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            _currentItem.name_item = tbName.Text;
-            _currentItem.condition = (cbCondition.SelectedItem as ComboBoxItem)?.Content.ToString();
-            _currentItem.authenticity = (cbAuthenticity.SelectedItem as ComboBoxItem)?.Content.ToString();
-
-            _currentItem.year = int.TryParse(tbYear.Text, out int year) ? year : (int?)null;
-            _currentItem.purchase_price = decimal.TryParse(tbPurchasePrice.Text, out decimal purchase) ? purchase : (decimal?)null;
-            _currentItem.selling_price = decimal.TryParse(tbSellingPrice.Text, out decimal sell) ? sell : (decimal?)null;
-            _currentItem.arrival_date = dpArrivalDate.SelectedDate;
-
-            _currentItem.id_supplier = (cbSupplier.SelectedItem as Suppliers)?.id_supplier;
-            _currentItem.id_category = (cbCategory.SelectedItem as Categories)?.id_category;
-            _currentItem.id_material = (cbMaterial.SelectedItem as Materials)?.id_material;
-            _currentItem.id_origin_country = (cbCountry.SelectedItem as Origin_countries)?.id_origin_country;
-            _currentItem.id_status = (cbStatus.SelectedItem as Statuses)?.id_status;
-
-            // Копирование изображения
-            if (_selectedImagePath != null)
-            {
-                string fileName = System.IO.Path.GetFileName(_selectedImagePath);
-                string destPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", fileName);
-
-                try
-                {
-                    File.Copy(_selectedImagePath, destPath, true);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка копирования изображения: " + ex.Message);
-                }
-            }
-
-            // Сохранение
-            if (!_isEditMode)
-                AppConnect.model0db.Items.Add(_currentItem);
-
             try
             {
-                AppConnect.model0db.SaveChanges();
-                MessageBox.Show("Информация сохранена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Простейшая валидация
+                if (string.IsNullOrWhiteSpace(tbName.Text) || cbCategory.SelectedItem == null)
+                {
+                    MessageBox.Show("Заполните обязательные поля (название и категория)");
+                    return;
+                }
+
+                // Присваиваем значения
+                _currentItem.name_item = tbName.Text;
+                _currentItem.year = int.TryParse(tbYear.Text, out int year) ? year : (int?)null;
+                _currentItem.condition = tbCondition.Text;
+                _currentItem.authenticity = tbAuthenticity.Text;
+                _currentItem.purchase_price = decimal.TryParse(tbPurchasePrice.Text, out decimal purchasePrice) ? purchasePrice : (decimal?)null;
+                _currentItem.selling_price = decimal.TryParse(tbSellingPrice.Text, out decimal sellingPrice) ? sellingPrice : (decimal?)null;
+                _currentItem.arrival_date = dpArrivalDate.SelectedDate;
+                _currentItem.image = tbImage.Text;
+
+                _currentItem.id_category = cbCategory.SelectedValue as int?;
+                _currentItem.id_material = cbMaterial.SelectedValue as int?;
+                _currentItem.id_supplier = cbSupplier.SelectedValue as int?;
+                _currentItem.id_status = cbStatus.SelectedValue as int?;
+                _currentItem.id_origin_country = cbOriginCountry.SelectedValue as int?;
+
+                // Добавление или редактирование
+                if (_currentItem.id_item == 0)
+                    _context.Items.Add(_currentItem); // Новый товар
+
+                _context.SaveChanges();
+                MessageBox.Show("Товар успешно сохранён!");
                 NavigationService.GoBack();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при сохранении: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ошибка при сохранении: " + ex.Message);
             }
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }

@@ -21,6 +21,7 @@
             <MenuItem Header="Личная информация" Click="UserInfo_Click"/>
             <MenuItem Header="Журнал изменений" Click="OpenLogs_Click"/>
             <MenuItem Header="Выход" FontWeight="Bold" Click="Logout_Click"/>
+            <Button Content="Обновить" Width="100" Margin="10" Click="Refresh_Click"/>
         </Menu>
 
         <!-- Панель фильтров, поиска и управления -->
