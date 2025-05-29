@@ -8,24 +8,65 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Журнал изменений">
 
-    <Grid Background="#FFE8DCCA" Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid Background="#EEE0CB" Margin="20">
+        <Border Background="White" CornerRadius="20" Padding="20" Margin="20,20,20,20" BorderBrush="#8B5E3C" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <TextBlock Text="Журнал изменений товара" FontSize="24" FontWeight="Bold" Foreground="#8B5E3C" Margin="0,0,0,20"/>
-        <Button Content="← Назад" Width="80" Height="30" Background="Transparent"
-                BorderBrush="Transparent" BorderThickness="1" Foreground="#8B5E3C"
-                FontWeight="Normal" Margin="0,0,0,10" Click="BtnBack_Click"/>
-        <DataGrid x:Name="LogsDataGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False"
-                  HeadersVisibility="Column" Background="White" BorderBrush="#FFA58B5F" BorderThickness="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Поле" Binding="{Binding changed_field}" Width="*" />
-                <DataGridTextColumn Header="Старое значение" Binding="{Binding old_value}" Width="*" />
-                <DataGridTextColumn Header="Новое значение" Binding="{Binding new_value}" Width="*" />
-                <DataGridTextColumn Header="Дата изменения" Binding="{Binding change_date, StringFormat=dd.MM.yyyy HH:mm}" Width="*" />
-            </DataGrid.Columns>
-        </DataGrid>
+                <!-- Верхняя панель -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="← Назад" Width="100" Height="35" Margin="0,0,20,10"
+                            Background="#F5DEB3" Foreground="#8B5E3C" FontWeight="Bold"
+                            BorderThickness="0" Cursor="Hand" Click="BtnBack_Click"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                    <TextBlock Text="Журнал изменений товара"
+                               FontSize="26" FontWeight="Bold"
+                               Foreground="#8B5E3C" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Панель фильтра -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,15,0,10" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <TextBlock Text="Поле: " VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox x:Name="FieldFilterBox" Width="150" Margin="0,0,15,0"/>
+
+                    <TextBlock Text="Дата с: " VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <DatePicker x:Name="StartDatePicker" Width="130" Margin="0,0,10,0"/>
+
+                    <TextBlock Text="по: " VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <DatePicker x:Name="EndDatePicker" Width="130" Margin="0,0,10,0"/>
+
+                    <Button Content="Фильтровать" Click="FilterButton_Click"
+                            Background="#F5DEB3" Foreground="#8B5E3C" Padding="10,3" Cursor="Hand"/>
+                </StackPanel>
+
+                <!-- Таблица -->
+                <DataGrid x:Name="LogsDataGrid"
+                          Grid.Row="2"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          Background="White"
+                          RowBackground="#FFF8F0"
+                          AlternatingRowBackground="#FCEBD7"
+                          BorderBrush="#D2B48C"
+                          BorderThickness="1"
+                          GridLinesVisibility="Horizontal"
+                          ColumnHeaderHeight="35"
+                          RowHeight="35"
+                          FontSize="14"
+                          Foreground="#4B3B2A">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Товар" Binding="{Binding Items.name_item}" Width="*" />
+                        <DataGridTextColumn Header="Поле" Binding="{Binding changed_field}" Width="*" />
+                        <DataGridTextColumn Header="Старое значение" Binding="{Binding old_value}" Width="*" />
+                        <DataGridTextColumn Header="Новое значение" Binding="{Binding new_value}" Width="*" />
+                        <DataGridTextColumn Header="Дата изменения" Binding="{Binding change_date, StringFormat=dd.MM.yyyy HH:mm}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

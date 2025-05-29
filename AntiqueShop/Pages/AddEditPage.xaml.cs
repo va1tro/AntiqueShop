@@ -33,8 +33,13 @@ namespace AntiqueShop.Pages
         {
             InitializeComponent();
 
+            if (selectedItem != null)
+                _currentItem = _context.Items.FirstOrDefault(i => i.id_item == selectedItem.id_item);
+            else
+                _currentItem = new Items();
+
             // Если редактирование, то запоминаем выбранный товар
-            _currentItem = selectedItem ?? new Items();
+            ////_currentItem = selectedItem ?? new Items();
 
             // Привязка данных к ComboBox'ам
             cbCategory.ItemsSource = _context.Categories.ToList();
@@ -105,11 +110,50 @@ namespace AntiqueShop.Pages
 
                 // Добавление или редактирование
                 if (_currentItem.id_item == 0)
-                    _context.Items.Add(_currentItem); // Новый товар
+                    _context.Items.Add(_currentItem); // только если новый
+                if (_currentItem.id_item != 0)
+                {
+                    var oldItem = _context.Items.AsNoTracking().FirstOrDefault(i => i.id_item == _currentItem.id_item);
+                    var logList = new List<Item_logs>();
+
+                    void AddLog(string field, string oldVal, string newVal)
+                    {
+                        if (oldVal != newVal)
+                        {
+                            logList.Add(new Item_logs
+                            {
+                                id_item = _currentItem.id_item,
+                                changed_field = field,
+                                old_value = oldVal,
+                                new_value = newVal,
+                                change_date = DateTime.Now
+                            });
+                        }
+                    }
+
+                    AddLog("name_item", oldItem.name_item, _currentItem.name_item);
+                    AddLog("year", oldItem.year?.ToString(), _currentItem.year?.ToString());
+                    AddLog("condition", oldItem.condition, _currentItem.condition);
+                    AddLog("authenticity", oldItem.authenticity, _currentItem.authenticity);
+                    AddLog("purchase_price", oldItem.purchase_price?.ToString(), _currentItem.purchase_price?.ToString());
+                    AddLog("selling_price", oldItem.selling_price?.ToString(), _currentItem.selling_price?.ToString());
+                    AddLog("arrival_date", oldItem.arrival_date?.ToString("yyyy-MM-dd"), _currentItem.arrival_date?.ToString("yyyy-MM-dd"));
+                    AddLog("image", oldItem.image, _currentItem.image);
+                    AddLog("id_category", oldItem.id_category?.ToString(), _currentItem.id_category?.ToString());
+                    AddLog("id_material", oldItem.id_material?.ToString(), _currentItem.id_material?.ToString());
+                    AddLog("id_supplier", oldItem.id_supplier?.ToString(), _currentItem.id_supplier?.ToString());
+                    AddLog("id_status", oldItem.id_status?.ToString(), _currentItem.id_status?.ToString());
+                    AddLog("id_origin_country", oldItem.id_origin_country?.ToString(), _currentItem.id_origin_country?.ToString());
+
+                    _context.Item_logs.AddRange(logList);
+                }
 
                 _context.SaveChanges();
-                MessageBox.Show("Товар успешно сохранён!");
+                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Возврат назад
                 NavigationService.GoBack();
+
             }
             catch (Exception ex)
             {

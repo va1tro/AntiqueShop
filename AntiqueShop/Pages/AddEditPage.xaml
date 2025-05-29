@@ -9,7 +9,7 @@
       Title="Добавление/Редактирование товара">
 
     <Grid Background="#FFEEE0CB">
-        <Border Background="White" CornerRadius="10" Padding="20" BorderBrush="#8B5E3C" BorderThickness="2">
+        <Border Background="White" CornerRadius="10" Padding="20" Margin="20,20,20,20" BorderBrush="#8B5E3C" BorderThickness="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <TextBlock Text="Информация о товаре" FontSize="24" FontWeight="Bold"
