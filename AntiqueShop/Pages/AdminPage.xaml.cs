@@ -156,54 +156,25 @@ namespace AntiqueShop.Pages
             {
                 SaveFileDialog saveDialog = new SaveFileDialog
                 {
-                    Filter = "Excel файлы (*.xlsx)|*.xlsx",
-                    FileName = "Список_товаров.xlsx"
+                    Filter = "CSV файлы (*.csv)|*.csv|Excel файлы (*.xlsx)|*.xlsx",
+                    FileName = "Список_товаров.csv"
                 };
 
                 if (saveDialog.ShowDialog() == true)
                 {
-                    using (ExcelPackage package = new ExcelPackage())
+                    var sb = new StringBuilder();
+
+                    // Заголовки
+                    sb.AppendLine("Название;Год;Состояние;Подлинность;Цена покупки;Цена продажи;Дата поступления");
+
+                    // Данные
+                    foreach (var item in exportItems)
                     {
-                        ExcelWorksheet sheet = package.Workbook.Worksheets.Add("Товары");
-
-                        // Заголовки
-                        sheet.Cells[1, 1].Value = "Название";
-                        sheet.Cells[1, 2].Value = "Год";
-                        sheet.Cells[1, 3].Value = "Состояние";
-                        sheet.Cells[1, 4].Value = "Подлинность";
-                        sheet.Cells[1, 5].Value = "Цена покупки";
-                        sheet.Cells[1, 6].Value = "Цена продажи";
-                        sheet.Cells[1, 7].Value = "Дата поступления";
-
-                        // Стиль заголовков
-                        using (var range = sheet.Cells[1, 1, 1, 7])
-                        {
-                            range.Style.Font.Bold = true;
-                            range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Beige);
-                            range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-                        }
-
-                        int row = 2;
-                        foreach (var item in exportItems)
-                        {
-                            sheet.Cells[row, 1].Value = item.name_item;
-                            sheet.Cells[row, 2].Value = item.year;
-                            sheet.Cells[row, 3].Value = item.condition;
-                            sheet.Cells[row, 4].Value = item.authenticity;
-                            sheet.Cells[row, 5].Value = item.purchase_price;
-                            sheet.Cells[row, 6].Value = item.selling_price;
-                            sheet.Cells[row, 7].Value = item.arrival_date?.ToShortDateString();
-                            row++;
-                        }
-
-                        // Автоширина
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
-
-                        // Сохраняем
-                        File.WriteAllBytes(saveDialog.FileName, package.GetAsByteArray());
-                        MessageBox.Show("Файл успешно сохранён!", "Экспорт", MessageBoxButton.OK, MessageBoxImage.Information);
+                        sb.AppendLine($"\"{item.name_item}\";{item.year};{item.condition};{item.authenticity};{item.purchase_price};{item.selling_price};{item.arrival_date?.ToShortDateString()}");
                     }
+
+                    File.WriteAllText(saveDialog.FileName, sb.ToString(), Encoding.UTF8);
+                    MessageBox.Show("Файл успешно сохранён!", "Экспорт", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
