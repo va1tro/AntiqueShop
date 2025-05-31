@@ -9,7 +9,7 @@
       Title="ItemDetailsPage">
 
     <Grid Background="#FFE8DCCA" Margin="20">
-        <Border Background="White" Padding="20" CornerRadius="10" BorderBrush="#8B5E3C" BorderThickness="1">
+        <Border Background="White" Padding="20" Margin="20" CornerRadius="10" BorderBrush="#8B5E3C" BorderThickness="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <Image Source="{Binding CurrentPhoto}" Height="300" Stretch="Uniform" Margin="0,0,0,20"/>

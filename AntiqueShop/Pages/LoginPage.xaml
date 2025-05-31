@@ -31,7 +31,8 @@
                 <Grid Margin="0,0,0,20">
                     <PasswordBox x:Name="PasswordBox" Height="35" FontSize="14"
                                  Padding="10,0" VerticalContentAlignment="Center" 
-                                 PasswordChanged="PasswordBox_PasswordChanged"/>
+                                 PasswordChanged="PasswordBox_PasswordChanged"
+                                 KeyDown="PasswordBox_KeyDown"/>
                     <TextBlock x:Name="PasswordPlaceholder" Text="Пароль"
                                FontSize="14" Foreground="Gray"
                                Margin="10,0,0,0" VerticalAlignment="Center"

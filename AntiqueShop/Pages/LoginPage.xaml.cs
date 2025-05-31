@@ -62,6 +62,13 @@ namespace AntiqueShop.Pages
                 MessageBox.Show("Неверный логин или пароль");
             }
         }
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginButton_Click(sender, new RoutedEventArgs());
+            }
+        }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {

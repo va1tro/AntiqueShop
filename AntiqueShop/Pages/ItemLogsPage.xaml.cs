@@ -31,10 +31,18 @@ namespace AntiqueShop.Pages
         {
             using (var context = new AntiqueShopEntities3())
             {
-                var logs = context.Item_logs
-                                  .Where(l => l.id_item == itemId)
-                                  .OrderByDescending(l => l.change_date)
-                                  .ToList();
+                var logs = (from log in context.Item_logs
+                            join item in context.Items on log.id_item equals item.id_item
+                            where log.id_item == itemId
+                            orderby log.change_date descending
+                            select new
+                            {
+                                Items = new { name_item = item.name_item },
+                                log.changed_field,
+                                log.old_value,
+                                log.new_value,
+                                log.change_date
+                            }).ToList();
 
                 LogsDataGrid.ItemsSource = logs;
             }
@@ -44,13 +52,21 @@ namespace AntiqueShop.Pages
         {
             string fieldFilter = FieldFilterBox.Text?.ToLower();
             DateTime? startDate = StartDatePicker.SelectedDate;
-            DateTime? endDate = EndDatePicker.SelectedDate?.AddDays(1); // включительно
+            DateTime? endDate = EndDatePicker.SelectedDate?.AddDays(1);
 
             using (var context = new AntiqueShopEntities3())
             {
-                var filteredLogs = context.Item_logs
-                                          .Where(l => l.id_item == itemId)
-                                          .AsQueryable();
+                var filteredLogs = (from log in context.Item_logs
+                                    join item in context.Items on log.id_item equals item.id_item
+                                    where log.id_item == itemId
+                                    select new
+                                    {
+                                        Items = new { name_item = item.name_item },
+                                        log.changed_field,
+                                        log.old_value,
+                                        log.new_value,
+                                        log.change_date
+                                    }).AsQueryable();
 
                 if (!string.IsNullOrWhiteSpace(fieldFilter))
                     filteredLogs = filteredLogs.Where(l => l.changed_field.ToLower().Contains(fieldFilter));

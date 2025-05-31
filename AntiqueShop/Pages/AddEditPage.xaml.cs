@@ -60,7 +60,7 @@ namespace AntiqueShop.Pages
 
             cbOriginCountry.ItemsSource = _context.Origin_countries.ToList();
             cbOriginCountry.DisplayMemberPath = "name_country";
-            cbOriginCountry.SelectedValuePath = "id_country";
+            cbOriginCountry.SelectedValuePath = "id_origin_country";
 
             // Если редактируем — заполним поля
             if (selectedItem != null)
