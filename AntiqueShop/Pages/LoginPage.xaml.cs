@@ -1,6 +1,7 @@
 ﻿using AntiqueShop.AppData;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZXing;
 
 namespace AntiqueShop.Pages
 {
@@ -73,6 +75,32 @@ namespace AntiqueShop.Pages
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage()); // Убедись, что эта страница существует
+        }
+
+        private void Btn_qrcode_Click(object sender, RoutedEventArgs e)
+        {
+            var writer = new BarcodeWriter
+            {
+                Format = BarcodeFormat.QR_CODE,
+                Options = new ZXing.Common.EncodingOptions
+                {
+                    Width = 300,
+                    Height = 300
+                }
+            };
+            var result = writer.Write(@"https://music.yandex.ru/album/14599266/track/609676?utm_medium=copy_link");
+            var bitmap = new BitmapImage();
+            using (var memoryStream = new MemoryStream())
+            {
+                result.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                memoryStream.Position = 0;
+                bitmap.BeginInit();
+                bitmap.StreamSource = memoryStream;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                bitmap.Freeze();
+            }
+            imgQr.Source = bitmap;
         }
     }
 }

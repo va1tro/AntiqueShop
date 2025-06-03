@@ -9,6 +9,8 @@
       Title="LoginPage">
 
     <Grid Background="#FFEEE0CB">
+        <Image x:Name="imgQr" HorizontalAlignment="Left" Height="100" Margin="664,37,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Btn_qrcode" Content="QR-коде" HorizontalAlignment="Left" Margin="692,155,0,0" VerticalAlignment="Top" Click="Btn_qrcode_Click" Foreground="#FFECC286" Background="#8B5E3C" BorderBrush="Black"/>
         <Border Background="White" CornerRadius="20" Padding="30"
                 Width="400" VerticalAlignment="Center" HorizontalAlignment="Center"
                 BorderBrush="#FF8B5E3C" BorderThickness="2">
